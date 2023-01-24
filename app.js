@@ -16,9 +16,17 @@ app.set('view engine', 'ejs');
 
 app.use( express.static(path.join(__dirname,'public')))
 
-app.use((req,res)=> {
-	res.render('index',{username:'admin'});
+
+app.get('/',(req,res) => {
+	res.render('index',{username: 'admin'});
 });
+/* response
+app.use((req,res)=> {
+	var p = req.query.p;
+	res.render('index',{username:'admin'});
+	res.end(`p: ${p}`)
+});
+*/
 /*
 app.get( '/api/todo', (req, res) => {
 	res.json( todoRepo.getTodos() );
@@ -54,5 +62,13 @@ app.get( '/', (req, res) => {
 	res.render( 'app' );	
 })
 */
+//404
+app.get('/404',(req,res)=> {
+	res.status(404).render('404');
+});
+app.get('*',(req,res)=> {
+	res.redirect('/404');
+});
+
 http.createServer(app).listen(process.env.PORT || 3000);
 console.log( 'serwer działa' );
