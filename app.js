@@ -64,10 +64,12 @@ app.get( '/', (req, res) => {
 */
 //404
 app.get('/404',(req,res)=> {
-	res.status(404).render('404');
+	res.status(404).render('404',{ url : req.query.orgurl });
 });
+
 app.get('*',(req,res)=> {
-	res.redirect('/404');
+	var string= encodeURIComponent(req.url);
+	res.redirect('/404?orgurl='+string);	
 });
 
 http.createServer(app).listen(process.env.PORT || 3000);
