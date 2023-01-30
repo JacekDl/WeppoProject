@@ -37,6 +37,8 @@ async function main() {
     // const pro = await Product.findOne({name: "Apple"});
     // console.log(pro._id);
     // await Product.deleteOne({_id: pro._id});
+
+    //to działa:
     const user = await User.findOne({username: "Jacek"});
     console.log(user.username);
     user.checkPassword("abc", function(err, isMatch) {
@@ -47,4 +49,5 @@ async function main() {
         if (err) throw err;
         console.log("def: ", isMatch);
     });
+
 }
