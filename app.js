@@ -1,24 +1,50 @@
 var http = require('http');
 var express = require('express');
+var session = require('express-session');
 var ejs = require('ejs');
 const path = require('path');
 //var todoRepo = require('./todos');
 const { application } = require('express');
-var app = express();
+
+var cookieParser = require('cookie-parser');
+
+//var crypto = require('crypto');
+//var sectret = 'Lotr was not The 1!'
 
 //var json = express.json();
 
-//app.disable('etag');
+function authorize(req, res, next) {
+	if ( req.signedCookies.user ) {
+		req.user = req.signedCookies.user;
+		next();
+	} else {
+		res.redirect('/login?returnUrl='+req.url);
+	}
+}
 
+var app = express();
+var {checksession} = require('./functions/middleware')
 
 app.set('views', './views');
 app.set('view engine', 'ejs');
+app.disable('etag');
 
+app.use(session({resave:true,saveUninitialized:true,secret: "1 To rule them all!"}))
 app.use( express.static(path.join(__dirname,'public')))
 
 
+app.use(cookieParser());
+app.use(express.urlencoded({extended: true}));
+
 app.get('/',(req,res) => {
-	res.render('index',{username: 'admin'});
+	var cookieValue;
+	if(!req.cookies.cookie){
+		cookieValue = new Date().toString();
+		res.cookie('cookie',cookieValue);
+	} else{
+		cookieValue= req.cookies.cookie;
+	}
+	res.render('index',{username: 'admin',cookieValue: cookieValue});
 });
 /* response
 app.use((req,res)=> {
@@ -70,6 +96,24 @@ app.get('/404',(req,res)=> {
 app.get('*',(req,res)=> {
 	var string= encodeURIComponent(req.url);
 	res.redirect('/404?orgurl='+string);	
+});
+app.get( '/login', (req, res) => {
+	res.render('login');
+});
+
+app.post( '/login', (req, res) => {
+	var username = req.body.txtUser;
+	var pwd = req.body.txtPwd;
+	if ( username == pwd ) {
+		// wydanie ciastka
+		res.cookie('user', username, { signed: true });
+		// przekierowanie
+		var returnUrl = req.query.returnUrl;
+		res.redirect(returnUrl);
+	} else {
+		res.render( 'login', { message : "Zła nazwa logowania lub hasło" }
+		);
+	}
 });
 
 http.createServer(app).listen(process.env.PORT || 3000);

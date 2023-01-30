@@ -9,8 +9,12 @@
 </head>
 <body>
 	<div class="foo">
-		Username: <%= username %>
+		Username: <%= username %>  <a href='/logout'>Wyloguj się</a>
 	</div>
+	<form method = "POST">
+		Wartość ciasteczka: <%= cookieValue %>
+		<button>Zapisz</button>
+	</form>
 	
 </body>
 </html>
