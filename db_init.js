@@ -18,4 +18,6 @@ async function run() {
     await User.create({username: "Krzych", password: "weppo"});
     await User.create({username: "Szymon", password: "password"});
     await User.create({username: "Jacek", password: "abc"});
+    await User.create({username: "admin", password: "admin", role: "admin"});
+    await User.create({username: "user", password: "user"});
 }
