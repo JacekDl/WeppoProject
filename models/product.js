@@ -1,12 +1,12 @@
 var mongoose = require("mongoose");
 
 var productSchema = mongoose.Schema({
-    name: { type: String, required: true, unique: true },
+    name: { type: String, required: true, unique: false },
     description: { type: String },
-    price: Number
+    price: { type: Number, required: true, unique: false }
 });
 
-productSchema.methods.name = function() {
+productSchema.methods.getName = function() {
     return this.name;
 }
 
