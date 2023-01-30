@@ -2,28 +2,24 @@ var http = require('http');
 var express = require('express');
 var session = require('express-session');
 var ejs = require('ejs');
+var ash = require('express-async-handler');
 const path = require('path');
-//var todoRepo = require('./todos');
 const { application } = require('express');
-
 var cookieParser = require('cookie-parser');
+
+//passport
+var {checksession} = require('./functions/middleware');
+var user =require('./functions/user');
 
 //var crypto = require('crypto');
 //var sectret = 'Lotr was not The 1!'
 
+//var todoRepo = require('./todos');
 //var json = express.json();
 
-function authorize(req, res, next) {
-	if ( req.signedCookies.user ) {
-		req.user = req.signedCookies.user;
-		next();
-	} else {
-		res.redirect('/login?returnUrl='+req.url);
-	}
-}
+
 
 var app = express();
-var {checksession} = require('./functions/middleware')
 
 app.set('views', './views');
 app.set('view engine', 'ejs');
@@ -33,10 +29,30 @@ app.use(session({resave:true,saveUninitialized:true,secret: "1 To rule them all!
 app.use( express.static(path.join(__dirname,'public')))
 
 
-app.use(cookieParser());
+app.use(cookieParser('You_shell_not_pass43221'));
 app.use(express.urlencoded({extended: true}));
 
-app.get('/',(req,res) => {
+app.use(checksession);
+
+function isUserInRole(user,role){
+	return user==role
+}
+function authorize(...roles) {
+	return function(req, res, next) {
+		if ( req.signedCookies.user ) {
+			let user = req.signedCookies.user;
+		if ( roles.length == 0 ||
+		roles.some( role => isUserInRole( user, role ) )) {
+			req.user = user;
+			return next();
+		}
+		}
+		// fallback na brak autoryzacji
+		res.redirect('/login?returnUrl='+req.url);
+	}
+}
+
+/*app.get('/',authorize(),(req,res) => {
 	var cookieValue;
 	if(!req.cookies.cookie){
 		cookieValue = new Date().toString();
@@ -44,8 +60,53 @@ app.get('/',(req,res) => {
 	} else{
 		cookieValue= req.cookies.cookie;
 	}
-	res.render('index',{username: 'admin',cookieValue: cookieValue});
+	res.render('index',{username: req.user,cookieValue: cookieValue});
 });
+
+app.get( '/logout', authorize(), (req, res) => {
+	res.cookie('user', '', { maxAge: -1 } );
+	res.redirect('/')
+});
+*/
+app.get('/',(req,res)=>{res.render('index');});
+app.get('/logout',user.logout);
+app.get ('/login',user.getLogin);
+app.post('/login',ash(user.postLogin))
+app.get( '/admin', authorize('admin'), (req, res) => {
+	res.setHeader('Content-type', 'text/html; charset=utf-8');
+	res.write('witaj administratorze');
+	res.end();
+})
+app.get( '/login', (req, res) => {
+	res.render('login');
+});
+
+app.post( '/login', (req, res) => {
+	var username = req.body.txtUser;
+	var pwd = req.body.txtPwd;
+	if ( username == pwd ) {
+		// wydanie ciastka
+		res.cookie('user', username, { signed: true });
+		// przekierowanie
+		var returnUrl = req.query.returnUrl;
+		res.redirect(returnUrl);
+	} else {
+		res.render( 'login', { message : "Zła nazwa logowania lub hasło" }
+		);
+	}
+});
+app.get('/404',(req,res)=> {
+	res.status(404).render('404',{ url : req.query.orgurl });
+});
+
+app.get('*',(req,res)=> {
+	var string= encodeURIComponent(req.url);
+	res.redirect('/404?orgurl='+string);	
+});
+
+
+http.createServer(app).listen(process.env.PORT || 2700);
+console.log( 'serwer działa' );
 /* response
 app.use((req,res)=> {
 	var p = req.query.p;
@@ -89,32 +150,3 @@ app.get( '/', (req, res) => {
 })
 */
 //404
-app.get('/404',(req,res)=> {
-	res.status(404).render('404',{ url : req.query.orgurl });
-});
-
-app.get('*',(req,res)=> {
-	var string= encodeURIComponent(req.url);
-	res.redirect('/404?orgurl='+string);	
-});
-app.get( '/login', (req, res) => {
-	res.render('login');
-});
-
-app.post( '/login', (req, res) => {
-	var username = req.body.txtUser;
-	var pwd = req.body.txtPwd;
-	if ( username == pwd ) {
-		// wydanie ciastka
-		res.cookie('user', username, { signed: true });
-		// przekierowanie
-		var returnUrl = req.query.returnUrl;
-		res.redirect(returnUrl);
-	} else {
-		res.render( 'login', { message : "Zła nazwa logowania lub hasło" }
-		);
-	}
-});
-
-http.createServer(app).listen(process.env.PORT || 3000);
-console.log( 'serwer działa' );
