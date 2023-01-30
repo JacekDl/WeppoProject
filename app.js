@@ -71,7 +71,7 @@ app.get( '/logout', authorize(), (req, res) => {
 app.get('/',(req,res)=>{res.render('index');});
 app.get('/logout',user.logout);
 app.get ('/login',user.getLogin);
-app.post('/login',ash(user.postLogin))
+app.post('/login',ash(user.postLogin));
 app.get( '/admin', authorize('admin'), (req, res) => {
 	res.setHeader('Content-type', 'text/html; charset=utf-8');
 	res.write('witaj administratorze');
@@ -105,7 +105,7 @@ app.get('*',(req,res)=> {
 });
 
 
-http.createServer(app).listen(process.env.PORT || 2700);
+http.createServer(app).listen(process.env.PORT || 3000);
 console.log( 'serwer działa' );
 /* response
 app.use((req,res)=> {
