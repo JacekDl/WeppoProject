@@ -4,14 +4,28 @@ const User = require('./models/user');
 
 mongoose.connect("mongodb://127.0.0.1:27017/product");
 
-const apple = new Product({ name: "Apple", description: "Jonagold", price: 2.50});
+// dodawanie produktu
+// const fruit = new Product({ name: "Watermelon", description: "Fresh and juicy", price: 6.0});
+// fruit.save();
 
-apple.save();
-
-const apple_2 = new Product({ name: "Apple", description: "Other", price: 1.50});
-
-apple_2.save();
-
+// dodawanie użytkownika
 // const krzych = new User( { username: "Krzych", password: "password"});
-
 // krzych.save();
+
+// wyszukanie produktu po nazwie
+// Product.find({ name: 'Apple' }, function(err, docs) {
+//     if (err) {
+//         console.log("Product not found in database");
+//         return;
+//     }
+//     console.log(docs);
+// });
+
+
+// funkcje await wewnątrz funkcji async
+main();
+async function main() {
+    await Product.deleteMany({name: "Watermelon"});
+    const fruit = new Product({ name: "Watermelon", description: "Fresh and juicy", price: 6.0});
+    await fruit.save();
+}
