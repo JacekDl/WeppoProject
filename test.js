@@ -26,15 +26,25 @@ mongoose.connect("mongodb://127.0.0.1:27017/product");
 main();
 async function main() {
     // await Product.deleteMany({name: "Watermelon"});
-    const fruit = new Product({ name: "Watermelon", description: "Fresh and juicy", price: 6.0});
+    // const fruit = new Product({ name: "Watermelon", description: "Fresh and juicy", price: 6.0});
     // await fruit.save();
-    const fruits = await Product.find();
+    // const fruits = await Product.find();
     // console.log(fruits);
-    const app = await Product.findByName("wa");
+    // const app = await Product.findByName("wa");
     // console.log(app);
-    const desc = await Product.findByDescription("gold");
+    // const desc = await Product.findByDescription("gold");
     // console.log(desc);
-    const pro = await Product.findOne({name: "Apple"});
-    console.log(pro._id);
-    await Product.deleteOne({_id: pro._id});
+    // const pro = await Product.findOne({name: "Apple"});
+    // console.log(pro._id);
+    // await Product.deleteOne({_id: pro._id});
+    const user = await User.findOne({username: "Jacek"});
+    console.log(user.username);
+    user.checkPassword("abc", function(err, isMatch) {
+        if (err) throw err;
+        console.log("abc: ", isMatch);
+    });
+    user.checkPassword("def", function(err, isMatch) {
+        if (err) throw err;
+        console.log("def: ", isMatch);
+    });
 }
