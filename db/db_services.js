@@ -25,7 +25,17 @@ async function update_order(id_order,closed){}
 
 
 module.exports = {
-	login_user
+	login_user,
+	add_user,
+	give_all_product,
+	find_by_name,
+	give_all_users,
+	add_product,
+	delete_product,
+	update_product,
+	give_all_orders,
+	add_order,
+	update_order
 }
 //index - cokie - jak przekazać , liste produktów jakoś
 //basket - cokie - pamiętanmie listy wybranych produktów ( obiekt js ) 
