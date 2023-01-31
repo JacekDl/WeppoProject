@@ -10,6 +10,18 @@
 </head>
 
 <body>
+<% if(locals.alert){ %>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-<%= locals.alert.type %>  alert-dismissible fade show" role="alert">
+                    <%= locals.alert.message %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } %>
 	<div class="foo">
 		
 		
@@ -19,12 +31,16 @@
 
 	</div>
 	<div class="foo">
-		Login:  <a href='/login'>Zaloguj się</a>
+		<% if(locals.logged){ %> Login: <%= locals.username %>. jakiś tekst <% } %> 
+		<a href='/login'>Zaloguj się</a>
 
-
-		
 	</div>
-	
+	<div>
+		<a href='/admin'>Admin</a>
+	</div>
+	<% if(locals.logged){ %>
+		<a>Ale jazda</a>
+		<% } %>
 	
 </body>
 </html>

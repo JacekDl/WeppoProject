@@ -9,7 +9,7 @@ var cookieParser = require('cookie-parser');
 
 //passport
 var {checksession} = require('./functions/middleware');
-var user =require('./functions/user');
+var userLogin =require('./functions/userLogin');
 
 //var crypto = require('crypto');
 //var sectret = 'Lotr was not The 1!'
@@ -33,50 +33,38 @@ app.use(cookieParser('You_shell_not_pass43221'));
 app.use(express.urlencoded({extended: true}));
 
 app.use(checksession);
-
-function isUserInRole(user,role){
-	return user==role
+function isUserInRole(userl,role){
+	return userl==role
 }
-function authorize(...roles) {
-	return function(req, res, next) {
-		if ( req.signedCookies.user ) {
-			let user = req.signedCookies.user;
-		if ( roles.length == 0 ||
-		roles.some( role => isUserInRole( user, role ) )) {
-			req.user = user;
-			return next();
+
+function authorize(...roles){
+	return function(req,res,next){
+		if(req.session.username)
+		{
+			console.error('coś nie tak');
+			console.error(req.session.username);
+			let rol = req.session.role;
+			if (roles == 0 || roles.some(role => isUserInRole(rol,role))){
+
+				req.user=req.session.userLogin;
+				return next();
+			}
+			
 		}
-		}
-		// fallback na brak autoryzacji
+		console.error('redirect');
 		res.redirect('/login?returnUrl='+req.url);
 	}
 }
-
-/*app.get('/',authorize(),(req,res) => {
-	var cookieValue;
-	if(!req.cookies.cookie){
-		cookieValue = new Date().toString();
-		res.cookie('cookie',cookieValue);
-	} else{
-		cookieValue= req.cookies.cookie;
-	}
-	res.render('index',{username: req.user,cookieValue: cookieValue});
-});
-
-app.get( '/logout', authorize(), (req, res) => {
-	res.cookie('user', '', { maxAge: -1 } );
-	res.redirect('/')
-});
-*/
 app.get('/',(req,res)=>{res.render('index');});
-app.get('/logout',user.logout);
-app.get ('/login',user.getLogin);
-app.post('/login',ash(user.postLogin));
+app.get('/logout',userLogin.logout);
+app.get ('/login',userLogin.getLogin);
+app.post('/login',ash(userLogin.postLogin));
 app.get( '/admin', authorize('admin'), (req, res) => {
 	res.setHeader('Content-type', 'text/html; charset=utf-8');
 	res.write('witaj administratorze');
 	res.end();
 })
+/*
 app.get( '/login', (req, res) => {
 	res.render('login');
 });
@@ -95,6 +83,7 @@ app.post( '/login', (req, res) => {
 		);
 	}
 });
+*/
 app.get('/404',(req,res)=> {
 	res.status(404).render('404',{ url : req.query.orgurl });
 });
@@ -107,46 +96,10 @@ app.get('*',(req,res)=> {
 
 http.createServer(app).listen(process.env.PORT || 3000);
 console.log( 'serwer działa' );
-/* response
-app.use((req,res)=> {
-	var p = req.query.p;
-	res.render('index',{username:'admin'});
-	res.end(`p: ${p}`)
-});
-*/
 /*
-app.get( '/api/todo', (req, res) => {
-	res.json( todoRepo.getTodos() );
-});
-
-	app.post( '/api/todo', json, (req, res) => {
-	// middleware json od razu parsuje request
-	var todo = req.body;
-	var description = todo.description;
-	// dodawanie
-	var todo = todoRepo.addTodo(description);
-	// zwrócenie do klienta
-	res.json( todo );
-});
-app.put( '/api/todo/:id', json, (req, res) => {
-	// middleware json od razu parsuje request
-	var todo = req.body;
-	// powinna być walidacja!
-	// modyfikacja
-	var id = req.params.id;
-	todo = todoRepo.updateTodo(id, todo.description);
-	// zwrócenie do klienta
-	res.json(todo);
-})
-app.delete( '/api/todo/:id', (req, res) => {
-	// usuwanie
-	var id = req.params.id;
-	todoRepo.removeTodo(id);
-	res.status(200);
-	res.end();
-});
-app.get( '/', (req, res) => {
-	res.render( 'app' );	
-})
+index - cokie - jak przekazać , liste produktów jakoś
+basket - cokie - pamiętanmie listy wybranych produktów ( obiekt js ) 
+lista - 
 */
 //404
+//live-server

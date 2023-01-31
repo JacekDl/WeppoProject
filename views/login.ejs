@@ -33,17 +33,30 @@
 	</style>
 </head>
 <body>
+<% if(locals.alert){ %>
+	<div class="container">
+	    <div class="row">
+		<div class="col">
+		    <div class="alert alert-<%= locals.alert.type %>  alert-dismissible fade show" role="alert">
+			<%= locals.alert.message %>
+			    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		    </div>
+		</div>
+	    </div>
+	</div>
+    <% } %>
+
 	<form method="POST">
 	<div id='login'>
 	<div>
 	Logowanie
 	</div>
 	<div>
-		<input type='text' name='txtUser' />
+		<input type='text' id = 'Login' name='Login' />
 		<label>Nazwa użytkownika:</label>
 	</div>
 	<div>
-		<input type='password' name='txtPwd' />
+		<input type='password' id="Password" name='Password' />
 		<label>Hasło:</label>
 	</div>
 	<div>
@@ -56,5 +69,6 @@
 	<% } %>
 	</div>
 </form>
+
 </body>
 </html>
