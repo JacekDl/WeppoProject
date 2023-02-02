@@ -64,6 +64,7 @@ app.get( '/admin', authorize('admin'), (req, res) => {
 	res.write('witaj administratorze');
 	res.end();
 })
+
 /*
 app.get( '/login', (req, res) => {
 	res.render('login');

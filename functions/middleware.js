@@ -1,6 +1,6 @@
 function checksession(req,res,next){
 	res.locals.logged = req.session.logged;
-	res.locals.isadmin = req.session.isadmin;
+	res.locals.role = req.session.role;
 	if(!req.session.basket){
 		req.session.basket={};
 		req.session.basketinfo ={};
