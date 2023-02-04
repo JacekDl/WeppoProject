@@ -37,7 +37,10 @@ async function give_all_users(){
 }
 
 
-async function add_product(name,description,price){}
+async function add_product(name, description, price){
+	const product = await Product.create({name: `${name}`, description: `${description}`, price: `${price}`});
+}
+
 async function delete_product(name){}
 async function update_product(name, description,price){}
 
@@ -50,7 +53,8 @@ module.exports = {
 	login_user,
 	give_all_product,
 	find_by_name,
-	give_all_users
+	give_all_users,
+	add_product
 }
 //index - cokie - jak przekazać , liste produktów jakoś
 //basket - cokie - pamiętanmie listy wybranych produktów ( obiekt js ) 

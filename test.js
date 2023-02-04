@@ -60,6 +60,10 @@ async function main() {
     // const pr_name = await services.find_by_name("app");
     // console.log(pr_name);
     
-    const all_us = await services.give_all_users();
-    console.log(all_us);
+    //OK:
+    // const all_us = await services.give_all_users();
+    // console.log(all_us);
+
+    //OK:
+    // await services.add_product("plum", "best in Wroclaw", "6.5");
 }
