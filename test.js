@@ -52,7 +52,12 @@ async function main() {
         console.log("def: ", isMatch);
     });
     
-    const pr = services.give_all_product();
-    console.log(pr);
+    //OK:
+    // const all_pr = await services.give_all_product();
+    // console.log(all_pr);
+
+    //OK:
+    // const pr_name = await services.find_by_name("app");
+    // console.log(pr_name);
     
 }
