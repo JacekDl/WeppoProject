@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Product = require('../models/product');
 const User = require('../models/user');
+const services = require('./db_services');
 
 // mongoose.connect("mongodb://127.0.0.1:27017/product");
 mongoose.connect("mongodb+srv://weppo:VfJ8CpO55Oj8QFwp@cluster0.xrcaeau.mongodb.net/?retryWrites=true&w=majority");
@@ -50,5 +51,8 @@ async function main() {
         if (err) throw err;
         console.log("def: ", isMatch);
     });
+    
+    const pr = services.give_all_product();
+    console.log(pr);
     
 }
