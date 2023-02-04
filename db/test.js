@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Product = require('../models/product');
 const User = require('../models/user');
 
-mongoose.connect("mongodb://127.0.0.1:27017/product");
+mongoose.connect("mongodb+srv://weppo:VfJ8CpO55Oj8QFwp@cluster0.xrcaeau.mongodb.net/?retryWrites=true&w=majority");
 
 // dodawanie produktu
 // const fruit = new Product({ name: "Watermelon", description: "Fresh and juicy", price: 6.0});

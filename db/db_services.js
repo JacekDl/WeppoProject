@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+
+mongoose.connect("mongodb+srv://weppo:VfJ8CpO55Oj8QFwp@cluster0.xrcaeau.mongodb.net/?retryWrites=true&w=majority");
 
 async function login_user(username,password){
 	if(username == password){
