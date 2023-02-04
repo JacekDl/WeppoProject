@@ -17,18 +17,26 @@ async function login_user(username,password){
 //może być po prostu jason ze wszystkim
 async function add_user(){}
 
-// to już działa
+
 // przykład użycia: const pr = await services.give_all_product();
 async function give_all_product(){
 	const products = await Product.find();
 	return products;
 }
 
+// przykład użycia: const pr_name = await services.find_by_name("app");
 async function find_by_name(name){
 	const products = await Product.findByName(name);
 	return products;
 }
-async function give_all_users(){}
+
+// przykład użycia: const all_us = await services.give_all_users();
+async function give_all_users(){
+	const users = await User.find();
+	return users;
+}
+
+
 async function add_product(name,description,price){}
 async function delete_product(name){}
 async function update_product(name, description,price){}
@@ -41,7 +49,8 @@ async function update_order(id_order,closed){}
 module.exports = {
 	login_user,
 	give_all_product,
-	find_by_name
+	find_by_name,
+	give_all_users
 }
 //index - cokie - jak przekazać , liste produktów jakoś
 //basket - cokie - pamiętanmie listy wybranych produktów ( obiekt js ) 
