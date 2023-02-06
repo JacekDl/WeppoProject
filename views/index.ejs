@@ -5,7 +5,7 @@
 
     <body>
         <% if(locals.logged){ %> 
-        <% if (session.role==='admin' ) {include ('components/adminPanel.ejs')} else if (session.role) { include
+        <% if (locals.role==='admin' ) {include ('components/adminPanel.ejs')} else if (locals.role) { include
             ('components/userPanel.ejs') } else { include ('components/defaultPanel.ejs') } %>
             else { include ('components/defaultPanel.ejs') } %>
             <% } %>

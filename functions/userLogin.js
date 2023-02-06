@@ -20,9 +20,9 @@ async function postLogin(req, res) {
 	//var userid = 1;
 	//var user = 
 	if(user){
-		bycrypt.compare(password,user.password, function (err,isValid)	{if (isValid) {
+		bcrypt.compare(password,user.password, function (err,isValid)	{if (isValid) {
 			//	console.error('user found');
-
+			console.log('nienienieneinei');
 			req.session.username = user.username;
 			req.session.userid = user.id;
 			req.session.logged = true;
@@ -36,7 +36,7 @@ async function postLogin(req, res) {
 		} else {
 			//console.error('login error');
 			//console.error(err);
-			
+			console.log("aaaaaaaaaaaanienkfnsdkfhs");
 			res.render('login', { alert: { type: 'warning', message: 'Nieprawidłowe hasło' } });
 		}});
 	}else {
