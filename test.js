@@ -1,21 +1,17 @@
 const mongoose = require('mongoose');
 const Product = require('./models/product');
 const User = require('./models/user');
+const Basket = require('./models/basket');
 const services = require('./db/db_services');
 
-// mongoose.connect("mongodb://127.0.0.1:27017/product");
 mongoose.connect("mongodb+srv://weppo:VfJ8CpO55Oj8QFwp@cluster0.xrcaeau.mongodb.net/?retryWrites=true&w=majority");
 
 // dodawanie produktu
 // const fruit = new Product({ name: "Watermelon", description: "Fresh and juicy", price: 6.0});
 // fruit.save();
 
-// dodawanie użytkownika
-// const krzych = new User( { username: "Krzych", password: "password"});
-// krzych.save();
-
 // wyszukanie produktu po nazwie
-// Product.find({ name: 'Apple' }, function(err, docs) {
+// Product.find({ name: 'apple' }, function(err, docs) {
 //     if (err) {
 //         console.log("Product not found in database");
 //         return;
@@ -27,6 +23,10 @@ mongoose.connect("mongodb+srv://weppo:VfJ8CpO55Oj8QFwp@cluster0.xrcaeau.mongodb.
 // funkcje await wewnątrz funkcji async
 main();
 async function main() {
+
+    // dodawanie użytkownika
+    // const krzych = new User( { username: "Krzych", password: "password"});
+    // krzych.save();
     // await Product.deleteMany({name: "Watermelon"});
     // const fruit = new Product({ name: "Watermelon", description: "Fresh and juicy", price: 6.0});
     // await fruit.save();
@@ -76,6 +76,35 @@ async function main() {
     // const wrong_pass = await services.login_user("Krzych", "kck");
     // console.log(wrong_pass);
 
-    const user_by_name = await services.find_user_by_name("Krzych");
-    console.log(user_by_name);
+    // const user_by_name = await services.find_user_by_name("Krzych");
+    // console.log(user_by_name);
+
+
+    ///// dodanie basket ///// OK
+    const user1 = await User.findOne({username: "Jacek"});
+    console.log(user1);
+    const prod1 = await Product.findOne({name: "apple"});
+    console.log(prod1);
+    const prod2 = await Product.findOne({name: "orange"});
+    console.log(prod2);
+
+    // const bask1 = new Basket({user: user1._id, products: [prod1._id, prod2._id]});
+    // await bask1.save();
+
+    await services.add_order(user1._id, [prod1._id, prod2._id]);
+
+    // const ord1 = await services.give_all_orders();
+    // console.log(ord1);
+
+
+    ///// kasowanie produktu ///// OK
+    // const prod3 = await Product.findOne({name: "apple"});
+    // console.log(prod3);
+    // await services.delete_product(prod3._id);
+
+
+    ///// updatowanie produktu ///// OK
+    // const prod3 = await Product.findOne({name: "apple"});
+    // console.log(prod3);
+    // await services.update_product(prod3._id, "best in Wroclaw", 6.5);
 }
