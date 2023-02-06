@@ -10,8 +10,10 @@ const cookieParser = require('cookie-parser');
 //passport
 const {checksession} = require('./functions/middleware');
 const userLogin =require('./functions/userLogin');
-const veryfication = require('./functions/verify');
+const validate = require('./functions/verify');
+const admin_fun= require('./functions/admin_fun');
 const user_fun = require('./functions/user_fun');
+const sbasket = require('./functions/basket_fun');
 //var crypto = require('crypto');
 //var sectret = 'Lotr was not The 1!'
 
@@ -34,32 +36,11 @@ app.use(cookieParser('You_shell_not_pass43221'));
 app.use(express.urlencoded({extended: true}));
 
 app.use(checksession);
-function isUserInRole(userl,role){
-	return userl==role
-}
 
-function authorize(...roles){
-	return function(req,res,next){
-		if(req.session.username)
-		{
-			console.error('coś nie tak');
-			console.error(req.session.username);
-			let rol = req.session.role;
-			if (roles == 0 || roles.some(role => isUserInRole(rol,role))){
-
-				req.user=req.session.userLogin;
-				return next();
-			}
-			
-		}
-		console.error('redirect');
-		res.redirect('/login?returnUrl='+req.url);
-	}
-}
 //app.get('/',(req,res)=>{res.render('index');});
 app.get('/',user_fun.give_all_product);
 
-app.get( '/admin', authorize('admin'), (req, res) => {
+app.get( '/admin', validate.vadmin, (req, res) => {
 	res.setHeader('Content-type', 'text/html; charset=utf-8');
 	res.write('witaj administratorze');
 	res.end();
@@ -73,10 +54,13 @@ app.get('/logout',userLogin.logout);
 app.get ('/login',userLogin.getLogin);
 app.post('/login',ash(userLogin.postLogin));
 
+app.get('/orders',validate.vadmin,ash(admin_fun.orders));
+//basket
+app.get('/basket',validate.vuser,sbasket.get);
 /*
 app.get( '/login', (req, res) => {
 	res.render('login');
-});
+})
 
 app.post( '/login', (req, res) => {
 	var username = req.body.txtUser;

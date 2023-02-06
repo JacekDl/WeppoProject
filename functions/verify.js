@@ -10,12 +10,12 @@ function vadmin(req,res,next){
 	if(req.session.logged && req.session.role == 'admin'){
 		next();
 	}else {
-		req.session.customAlert = {type: 'denger', message: 'You shell not pass. My minions sell be logged!'};
+		req.session.customAlert = {type: 'denger', message: 'You shell not pass. My minions shell be logged!'};
 		res.redirect('/login?redirect=' + req.url);
 	}
 }
 
-module.export = {
+module.exports = {
 	vuser,
 	vadmin
 }

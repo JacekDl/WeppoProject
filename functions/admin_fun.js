@@ -8,7 +8,7 @@ async function users(req,res){
 
 async function orders(req,res){
 	let list = await db.give_all_orders();
-	res.render = ('/admin',{orders_list:list}); // depends on vies implemented
+	res.render('orders',{orders:list}); // depends on vies implemented
 }
 
 async function chenge_o_status(req,res){
@@ -28,5 +28,6 @@ async function chenge_o_status(req,res){
 
 module.exports = {
 	users,
-	orders
+	orders,
+	chenge_o_status
 }

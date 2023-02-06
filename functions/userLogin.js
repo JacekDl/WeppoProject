@@ -23,12 +23,14 @@ async function postLogin(req, res) {
 	if(user){
 		bcrypt.compare(password,user.password, function (err,isValid)	{if (isValid) {
 			//	console.error('user found');
-			console.log('nienienieneinei');
+			
 			req.session.username = user.username;
 			req.session.userid = user.id;
 			req.session.logged = true;
 			req.session.role = user.role;
 			req.session.successLogin = true;
+			req.session.basketlen =0;
+			req.session.basketinfo =0;
 			var redirect = '/';
 			if (req.query.redirect) {
 				redirect = req.query.redirect;

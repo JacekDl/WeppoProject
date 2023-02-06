@@ -1,29 +1,35 @@
 const db = require('../db/db_services');
+const basket = require('../models/basket');
 
 
 function get(req, res) {
-    let products = [];
-    let bi = req.session.basketinfo;
+  if(req.session.basketlength==0){ 
+    req.session.customAlert = { type: 'danger', message: 'Koszyk jest PUSTY.' };
+    res.render('basket',{products:{},total:0});
+  } else
+    {
     let b = req.session.basket;
-    Object.keys(bi).map((key) => {
-        products_in_basket.push({ item: bi[key], amount: b[key].amount });
-    })
-    res.render('basket', { basket: products_in_basket });
+    let tot = req.session.basketinfo;
+   
+    res.render('basket', { products: b,total:tot });
+  }
 }
 
 
 async function add(req, res) {
-    //var id = Number(req.body.txtParam);
+    let name = String(req.params.id);
     req.session.basketlength += 1;
-   //if (req.session.basket[id]) {
-     //   req.session.basket[id].amount += 1;
-    //} else {
-        req.session.basket[id] = { amount: 1 };
-       // let full_prod = await db.get_full_product(id);
-        req.session.basketinfo[id] = full_prod[0];
-    //}
-    res.json({ success: "Updated Successfully", status: 200, productName: req.session.basketinfo[id].name });
-}
+    let product = await db.find_by_name(name);
+    let list = req.session.basket;
+    list.push(product);
+    req.session.basket=list;
+    let total=req.session.basketinfo;
+    total+=product.price;
+    req.session.basket=total;
+    //res.json({ success: "Updated Successfully", status: 200, productName: req.session.basketinfo[id].name });
+    req.session.customAlert = { type: 'success', message: 'Dodano produkt '+name };
+    res.render('index')
+  }
 
 function remove(req, res) {
     var id = parseInt(req.params.id);
@@ -69,7 +75,7 @@ async function checkout_post(req, res) {
       } else {
         userid = 1;
       }
-      let id = await db.add_purchase(userid, 1);
+      //let id = await db.add_purchase(userid, 1);
       let bi = req.session.basketinfo;
       let b = req.session.basket;
       Object.keys(bi).map(async (key) => {
