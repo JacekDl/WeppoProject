@@ -1,8 +1,8 @@
 <div class="Login__wrapper">
     <span class="Login__item message">Jesteś zalogowany</span>
     <span class="Login__item name">
-        <%= name%>
+        <%= locals.username%>
     </span>
-    <span class="Login__item settings" href="settings">Ustawienia</span>
-    <span class="Login__item logout" href="index">Wyloguj się</span>
+    <a class="Login__item settings" href="settings">Ustawienia</a>
+    <a class="Login__item logout" href="index">Wyloguj się</a>
 </div>
