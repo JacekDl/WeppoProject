@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const Product = require('./models/product');
-const User = require('./models/user');
-const Basket = require('./models/basket');
-const services = require('./db/db_services');
+const Product = require('../models/product');
+const User = require('../models/user');
+const Basket = require('../models/basket');
+const services = require('./db_services');
 
 mongoose.connect("mongodb+srv://weppo:VfJ8CpO55Oj8QFwp@cluster0.xrcaeau.mongodb.net/?retryWrites=true&w=majority");
 
