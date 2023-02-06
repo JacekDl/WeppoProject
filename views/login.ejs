@@ -1,74 +1,19 @@
-<!-- login.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<style>
-	html, body, form {
-		height: 100%;
-		overflow: hidden;
-	}
-	form {
-		display : flex;
-		justify-content : center;
-		align-items : center;
-	}
-	#login {
-		padding : 20px;
-		border : 1px solid black;
-	}
-	#login div {
-	overflow : auto;
-	}
-	#login input {
-	float : right;
-	}
-	button {
-	clear : both;
-	}
-	.message {
-	color : red;
-	}
-	</style>
-</head>
-<body>
-<% if(locals.alert){ %>
-	<div class="container">
-	    <div class="row">
-		<div class="col">
-		    <div class="alert alert-<%= locals.alert.type %>  alert-dismissible fade show" role="alert">
-			<%= locals.alert.message %>
-			    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		    </div>
-		</div>
-	    </div>
-	</div>
-    <% } %>
 
-	<form method="POST">
-	<div id='login'>
-	<div>
-	Logowanie
-	</div>
-	<div>
-		<input type='text' id = 'Login' name='Login' />
-		<label>Nazwa użytkownika:</label>
-	</div>
-	<div>
-		<input type='password' id="Password" name='Password' />
-		<label>Hasło:</label>
-	</div>
-	<div>
-		<button>Zaloguj</button>
-	</div>
-	<% if ( locals.message ) { %>
-	<div class='message'>
-	<%= locals.message %>
-	</div>
-	<% } %>
-	</div>
-</form>
+<% include ('components/head.ejs') %>
 
-</body>
+    <body>
+        <% include ('components/header.ejs')%>
+            <form class="Login__wrapper" method="post">
+                <label class="Login__item Login__label" for="Login">Nazwa użytkownika:</label>
+                <input class="Login__item Login" id="Login" name="Login" type="text">
+                <label class="Login__item Password__label" for="Password">Hasło:</label>
+                <input class="Login__item Password" id="Password" name="Password" type="hidden" />
+                <button class="Login__item submit" type="submit">Zaloguj się</button>
+            </form>
+
+            <% include ('components/footer.ejs') %>
+    </body>
+
 </html>
