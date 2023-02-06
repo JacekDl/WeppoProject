@@ -19,17 +19,26 @@ const bcrypt = require('bcrypt-nodejs');
 
 
 // TODO: to trzeba będzie zaimplementować z poziomu backendu - do compare trzeba dodać callback
-// async function login_user(username, guess) {
-// 	const user = await User.findOne({username: `${username}`});
-// 	console.log(user.username);
-// 	console.log(user.password);
+async function login_user(username, guess) {
+	const user = await User.findOne({username: `${username}`});
+	console.log(user.username);
 	
-// 	const match = await bcrypt.compare(guess, user.passwordHash, function(err, isMatch) {
-// 		if (err) throw err;
-// 		console.log(isMatch);
-// 	});
-	
-// }
+	// const match = await bcrypt.compare(guess, user.passwordHash, function(err, isMatch) {
+	// 	if (err) throw err;
+	// 	console.log(isMatch);
+	// });
+
+	const answer = await user.checkPassword(guess, function(err, isMatch) {
+        if (err) throw err;
+        if (isMatch) {
+		console.log("success!");
+		}
+		return isMatch;
+    });	
+
+	console.log(answer);
+	return answer;
+}
 
 //może być po prostu jason ze wszystkim
 // przykład użycia await add_user("Zdzisław", "zpl")
