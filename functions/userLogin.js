@@ -1,6 +1,7 @@
 //var mongoose = require('mongoose');
 //mongoose.connect('mongodb://127.0.0.1:27017/test');
-var db = require('../db/db_services');
+const db = require('../db/db_services');
+const bcrypt = require('bcrypt-nodejs');
 
 function getLogin(req, res) {
 	if (req.session.logged) {
@@ -12,30 +13,38 @@ function getLogin(req, res) {
 async function postLogin(req, res) {
 	var username = req.body.Login;
 	var password = req.body.Password;
-	var user = await db.login_user(username, password);
+	var user = await db.find_user_by_name(username);
 	//console.error(username);
 	//console.error(password);
 	//var user = await
 	//var userid = 1;
 	//var user = 
-	if (user) {
-		//	console.error('user found');
+	if(user){
+		bycrypt.compare(password,user.password, function (err,isValid)	{if (isValid) {
+			//	console.error('user found');
 
-		req.session.username = user.username;
-		req.session.userid = user.id;
-		req.session.logged = true;
-		req.session.role = user.role;
-		req.session.successLogin = true;
-		var redirect = '/';
-		if (req.query.redirect) {
-			redirect = req.query.redirect;
+			req.session.username = user.username;
+			req.session.userid = user.id;
+			req.session.logged = true;
+			req.session.role = user.role;
+			req.session.successLogin = true;
+			var redirect = '/';
+			if (req.query.redirect) {
+				redirect = req.query.redirect;
+			}
+			res.redirect(redirect);
+		} else {
+			//console.error('login error');
+			//console.error(err);
+			
+			res.render('login', { alert: { type: 'warning', message: 'Nieprawidłowe hasło' } });
+		}});
+	}else {
+			//console.error('login error');
+			//console.error(err);
+			
+			res.render('login', { alert: { type: 'warning', message: 'Nieprawidłowy login' } });
 		}
-		res.redirect(redirect);
-	} else {
-		//console.error('login error');
-		//console.error(err);
-		res.render('login', { alert: { type: 'warning', message: 'Nieprawidłowy login lub hasło' } });
-	}
 }
 
 function logout(req, res) {

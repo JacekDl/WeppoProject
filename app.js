@@ -10,7 +10,8 @@ const cookieParser = require('cookie-parser');
 //passport
 const {checksession} = require('./functions/middleware');
 const userLogin =require('./functions/userLogin');
-const veryfication = require('./functions/verify')
+const veryfication = require('./functions/verify');
+const user_fun = require('./functions/user_fun');
 //var crypto = require('crypto');
 //var sectret = 'Lotr was not The 1!'
 
@@ -55,7 +56,8 @@ function authorize(...roles){
 		res.redirect('/login?returnUrl='+req.url);
 	}
 }
-app.get('/',(req,res)=>{res.render('index');});
+//app.get('/',(req,res)=>{res.render('index',{products:});});
+app.get('/',user_fun.give_all_product)
 app.get('/logout',userLogin.logout);
 app.get ('/login',userLogin.getLogin);
 app.post('/login',ash(userLogin.postLogin));

@@ -36,7 +36,9 @@ const bcrypt = require('bcrypt-nodejs');
 async function add_user(name, password){
 	await User.create({username: `${name}`, password: `${password}`});
 }
-
+async function find_user_by_name(){
+	return {};
+}
 // przykład użycia: const pr = await services.give_all_product();
 async function give_all_product(){
 	const products = await Product.find();
@@ -77,13 +79,13 @@ async function update_order(id_order,closed){}
 
 
 module.exports = {
-	login_user,
+	//login_user,
 	give_all_product,
 	find_by_name,
 	give_all_users,
 	add_product,
 	add_user,
-	login_user
+	find_user_by_name
 }
 
 
