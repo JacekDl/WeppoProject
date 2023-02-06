@@ -48,14 +48,16 @@ async function login_user(username, guess) {
 
 }
 
-//może być po prostu jason ze wszystkim
 // przykład użycia await add_user("Zdzisław", "zpl")
 async function add_user(name, password){
 	await User.create({username: `${name}`, password: `${password}`});
 }
-async function find_user_by_name(){
-	return {};
+
+async function find_user_by_name(name){
+	const user = User.findOne({username: name});
+	return user;
 }
+
 // przykład użycia: const pr = await services.give_all_product();
 async function give_all_product(){
 	const products = await Product.find();
