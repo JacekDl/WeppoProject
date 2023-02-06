@@ -5,6 +5,7 @@ const Product = require('../models/product');
 const User = require('../models/user');
 const bcrypt = require('bcrypt-nodejs');
 
+
 // async function login_user(username,password){
 // 	if(username == password){
 // 		if(username == 'admin' || username == 'sauron'||username == 'saruman')
@@ -22,22 +23,22 @@ const bcrypt = require('bcrypt-nodejs');
 async function login_user(username, guess) {
 	const user = await User.findOne({username: `${username}`});
 	console.log(user.username);
-	
-	// const match = await bcrypt.compare(guess, user.passwordHash, function(err, isMatch) {
-	// 	if (err) throw err;
-	// 	console.log(isMatch);
-	// });
 
-	const answer = await user.checkPassword(guess, function(err, isMatch) {
-        if (err) throw err;
-        if (isMatch) {
-		console.log("success!");
-		}
-		return isMatch;
-    });	
+	const salt = bcrypt.genSaltSync(10);
+	const hash = bcrypt.hashSync(guess, salt);
+	console.log(hash);
 
-	console.log(answer);
-	return answer;
+    //...
+
+	// const answer = await user.checkPassword(guess, function(err, isMatch) {
+    //     if (err) throw err;
+    //     if (isMatch) {
+	// 		console.log("success!");
+	// 		return true;
+	// 	}
+	// 	return false;
+    // });	
+
 }
 
 //może być po prostu jason ze wszystkim
@@ -69,6 +70,11 @@ async function add_product(name, description, price){
 	const product = await Product.create({name: `${name}`, description: `${description}`, price: `${price}`});
 }
 
+async function find_user_by_name(name) {
+	const user = await User.findOne({username: `${name}`});
+	return user;
+}
+
 // TODO: kasować produkt po nazwie (nieunikalna) czy po _id (unikalne)
 async function delete_product(name){}
 
@@ -92,7 +98,8 @@ module.exports = {
 	give_all_users,
 	add_product,
 	add_user,
-	login_user
+	login_user,
+	find_user_by_name
 }
 
 

@@ -70,9 +70,12 @@ async function main() {
     //OK:
     // await services.add_user("Zdzisław", "zpl");
 
-    const right_pass = await services.login_user("Krzych", "weppo");
-    console.log(right_pass);
+    // const right_pass = await services.login_user("Krzych", "weppo");
+    // console.log(right_pass);
 
-    const wrong_pass = await services.login_user("Krzych", "kck");
-    console.log(wrong_pass);
+    // const wrong_pass = await services.login_user("Krzych", "kck");
+    // console.log(wrong_pass);
+
+    const user_by_name = await services.find_user_by_name("Krzych");
+    console.log(user_by_name);
 }
