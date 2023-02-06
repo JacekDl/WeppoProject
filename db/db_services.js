@@ -50,7 +50,7 @@ async function login_user(username, guess) {
 
 // przykład użycia await add_user("Zdzisław", "zpl")
 async function add_user(name, password){
-	await User.create({username: `${name}`, password: `${password}`});
+	await User.create({username: `${name}`, password: `${password}`}, err => console.log(err.message));
 }
 
 async function find_user_by_name(name){
@@ -81,6 +81,8 @@ async function add_product(name, description, price){
 	const product = await Product.create({name: `${name}`, description: `${description}`, price: `${price}`});
 }
 
+
+// przykład użycia: const user = await services.find_user_by_name("Krzych");
 async function find_user_by_name(name) {
 	const user = await User.findOne({username: `${name}`});
 	return user;

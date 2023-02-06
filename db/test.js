@@ -108,6 +108,8 @@ async function main() {
     // console.log(prod3);
     // await services.update_product(prod3._id, "best in Wroclaw", 6.5);
 
-    const user = await services.find_user_by_name("Krzych");
-    console.log(user);
+    // const user = await services.find_user_by_name("Krzych");
+    // console.log(user);
+
+    await services.add_user("Krzych", "abc");
 }
