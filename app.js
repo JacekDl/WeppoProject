@@ -56,8 +56,8 @@ function authorize(...roles){
 		res.redirect('/login?returnUrl='+req.url);
 	}
 }
-app.get('/',(req,res)=>{res.render('index');});
-app.get('/products',user_fun.give_all_product);
+//app.get('/',(req,res)=>{res.render('index');});
+app.get('/',user_fun.give_all_product);
 
 app.get( '/admin', authorize('admin'), (req, res) => {
 	res.setHeader('Content-type', 'text/html; charset=utf-8');

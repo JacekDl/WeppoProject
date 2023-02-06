@@ -17,9 +17,10 @@
                 </div>
 
                 <% include ('components/searchBar.ejs') %>
-
+                
                     <main class="goods__panel">
-                        <% if(locals.products){ %> 
+                        
+                        <% if(locals.logged){ %> 
                         <% for (let i=0; i<products.length; i++) { %>
                             <div class="panel__item good">
                                 <span class="good__name">
@@ -36,6 +37,21 @@
                                     <img class="basket__item basket" src="../images/basket.jpeg" id="basket">
                                     !!!!button
                                 </div>
+                            </div>
+                            <% } %>
+                        <% } else {%>
+                            <% for (let i=0; i<products.length; i++) { %>
+                            <div class="panel__item good">
+                                <span class="good__name">
+                                    <%= products[i].name %>
+                                </span>
+                                <span class="good__price">
+                                    <%= products[i].price %>
+                                </span>
+                                <span class="good__description">
+                                    <%= products[i].description %>
+                                </span>
+                                
                             </div>
                             <% } %>
                         <% } %>
