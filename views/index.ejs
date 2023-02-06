@@ -4,61 +4,48 @@
 <% include ('components/head.ejs') %>
 
     <body>
-        <% if(locals.logged){ %> 
-        <% if (locals.role==='admin' ) {include ('components/adminPanel.ejs')} else if (locals.role) { include
-            ('components/userPanel.ejs') } else { include ('components/defaultPanel.ejs') } %>
-            else { include ('components/defaultPanel.ejs') } %>
-            <% } %>
-            <% include ('components/header.ejs')%>
-                <div class="category__wrapper">
-                    <span class="category monitors">Monitors</span>
-                    <span class="category graphic-cards">Graphic Cards</span>
-                    <span class="category chargers">Chargers</span>
-                </div>
-
-                <% include ('components/searchBar.ejs') %>
-                
-                    <main class="goods__panel">
-                        
-                        <% if(locals.logged){ %> 
-                        <% for (let i=0; i<products.length; i++) { %>
-                            <div class="panel__item good">
-                                <span class="good__name">
-                                    <%= products[i].name %>
-                                </span>
-                                <span class="good__price">
-                                    <%= products[i].price %>
-                                </span>
-                                <span class="good__description">
-                                    <%= products[i].description %>
-                                </span>
-                                <div class="basket__wrapper">
-                                    <label class="basket__item basket__label" for="basket">Dodaj do koszyka</label>
-                                    <img class="basket__item basket" src="../images/basket.jpeg" id="basket">
-                                    !!!!button
-                                </div>
-                            </div>
-                            <% } %>
+        <% if (locals.logged && locals.role==='admin' ) { %>
+            <%- include ('components/adminPanel.ejs') %>
+                <%} else if (locals.logged) { %>
+                    <%- include ('components/userPanel.ejs') %>
                         <% } else {%>
-                            <% for (let i=0; i<products.length; i++) { %>
-                            <div class="panel__item good">
-                                <span class="good__name">
-                                    <%= products[i].name %>
-                                </span>
-                                <span class="good__price">
-                                    <%= products[i].price %>
-                                </span>
-                                <span class="good__description">
-                                    <%= products[i].description %>
-                                </span>
-                                
-                            </div>
-                            <% } %>
-                        <% } %>
-                    </main>
+                            <%- include ('components/defaultPanel.ejs') %>
+                                <%} %>
 
-                    <% include ('components/footer.ejs') %>
-                    
+                                    <%- include ('components/header.ejs')%>
+                                        <div class="category__wrapper">
+                                            <span class="category monitors">Monitors</span>
+                                            <span class="category graphic-cards">Graphic Cards</span>
+                                            <span class="category chargers">Chargers</span>
+                                        </div>
+
+                                        <%- include ('components/searchBar.ejs') %>
+
+                                            <main class="goods__panel">
+                                                <% for (let i=0; i<products.length; i++) { %>
+                                                    <div class="panel__item good">
+                                                        <span class="good__name">
+                                                            <%= products[i].name%>
+                                                        </span>
+                                                        <span class="good__price">
+                                                            <%= products[i].price%>
+                                                        </span>
+                                                        <span class="good__description">
+                                                            <%= products[i].description%>
+                                                        </span>
+                                                        <% if (locals.logged) { %>
+                                                            <div class="basket__wrapper">
+                                                                <label class="basket__item basket__label"
+                                                                    for="basket">Dodaj do koszyka</label>
+                                                                <img class="basket__item basket"
+                                                                    src="../images/basket.jpeg" id="basket">
+                                                            </div>
+                                                            <% } %>
+                                                    </div>
+                                                    <% } %>
+                                            </main>
+
+                                            <%- include ('components/footer.ejs') %>
     </body>
 
 </html>

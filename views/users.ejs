@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include ('components/head.ejs') %>
+
+    <body>
+        <%- include ('components/adminPanel.ejs') %>
+
+            <%- include ('components/header.ejs')%>
+
+                <main class="users__panel">
+                    <% for (let i=0; i<users.length; i++) { %>
+                        <div class="panel__item user">
+                            <span class="user__id">
+                                <%= users[i].id%>
+                            </span>
+                            <span class="user__name">
+                                <%= products[i].name%>
+                            </span>
+                        </div>
+                        <% } %>
+                </main>
+
+                <%- include ('components/footer.ejs') %>
+    </body>
+
+</html>
