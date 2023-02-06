@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<% include ('components/head.ejs') %>
+<%- include ('components/head.ejs', {title: "Warzywniak - strona główna" , style: "index.css" }) %>
 
     <body>
         <% if (locals.logged && locals.role==='admin' ) { %>
@@ -13,12 +13,6 @@
                                 <%} %>
 
                                     <%- include ('components/header.ejs')%>
-                                        <div class="category__wrapper">
-                                            <span class="category monitors">Monitors</span>
-                                            <span class="category graphic-cards">Graphic Cards</span>
-                                            <span class="category chargers">Chargers</span>
-                                        </div>
-
                                         <%- include ('components/searchBar.ejs') %>
 
                                             <main class="goods__panel">
