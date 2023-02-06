@@ -57,18 +57,18 @@ function logout(req, res) {
 	res.redirect('/');
 }
 async function postRegister(req,res){
-	var username = req.body.Login;
+	var username = req.body.Register;
 	var password = req.body.Password;
-	var password2 = req.body.Password-repeat;
+	var password2 = req.body.Password2;
 	var user = await db.find_user_by_name(username);
 	if(!user){
-		if (password===password2){
-			await db.add_user(usernme,password);
-			res.render('/login',{alert: {type: 'success', message: 'Rejsttacja się powiodła'}});
+		if (password==password2 && password != ''){
+			await db.add_user(username,password);
+			res.render('index',{alert: {type: 'success', message: 'Rejsttacja się powiodła'}});
 		}
-		else {res.render('/register', { alert: { type: 'warning', message: 'Hasła są różne' } });}
+		else {res.render('register', { alert: { type: 'warning', message: 'Hasła są różne' } });}
 	}else{
-		res.render('/register', { alert: { type: 'warning', message: 'Nieprawidłowy login' } });
+		res.render('register', { alert: { type: 'warning', message: 'Nieprawidłowy login' } });
 	}
 
 }
