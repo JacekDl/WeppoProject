@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<% include ('components/head.ejs', {title: "Warzywniak - strona główna" , style: "index.css" }) %>
+<%- include ('components/head.ejs', {title: "Warzywniak - strona główna" , style: "index.css" }) %>
 
     <body>
         <% if (locals.logged && locals.role==='admin' ) { %>
