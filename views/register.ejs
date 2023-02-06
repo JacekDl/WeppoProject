@@ -4,14 +4,14 @@
 <%- include ('components/head.ejs') %>
 
     <body>
-        <%- include header.ejs%>
+        <%- include ('components/header.ejs')%>
             <form id="register-form" class="Register__wrapper" method="post">
                 <label class="Register__item Register__label" for="Register">Nazwa użytkownika:</label>
                 <input class="Register__item Register" id="Register" name="Register" type="text">
                 <label class="Register__item Password__label" for="Password">Hasło:</label>
                 <input class="Register__item Password" id="Password" name="Password" type="password" />
                 <label class="Register__item Password-repeat__label" for="Password-repeat">Powtórz hasło:</label>
-                <input class="Register__item Password-repeat" id="Password-repeat" name="Password-repeat"
+                <input class="Register__item Password-repeat" id="Password-repeat" name="Password2"
                     type="password" />
                 <button class="Register__item submit" form="register-form" type="submit">Zarejestruj się</button>
             </form>

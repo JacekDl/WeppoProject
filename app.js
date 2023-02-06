@@ -66,11 +66,13 @@ app.get( '/admin', authorize('admin'), (req, res) => {
 });
 //app.get('/admin/users',)
 //logowanie i rejestr
-app.get('/register',(req,res)=> (res.render('register')));
+app.get('/register',(req,res)=> {res.render('register');});
+app.post('/register',ash(userLogin.postRegister));
 
 app.get('/logout',userLogin.logout);
 app.get ('/login',userLogin.getLogin);
 app.post('/login',ash(userLogin.postLogin));
+
 /*
 app.get( '/login', (req, res) => {
 	res.render('login');

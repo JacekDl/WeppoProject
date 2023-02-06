@@ -2,6 +2,7 @@
 //mongoose.connect('mongodb://127.0.0.1:27017/test');
 const db = require('../db/db_services');
 const bcrypt = require('bcrypt-nodejs');
+const { render } = require('ejs');
 
 function getLogin(req, res) {
 	if (req.session.logged) {
@@ -36,7 +37,6 @@ async function postLogin(req, res) {
 		} else {
 			//console.error('login error');
 			//console.error(err);
-			console.log("aaaaaaaaaaaanienkfnsdkfhs");
 			res.render('login', { alert: { type: 'warning', message: 'Nieprawidłowe hasło' } });
 		}});
 	}else {
@@ -56,8 +56,25 @@ function logout(req, res) {
 	req.session.logout = true;
 	res.redirect('/');
 }
+async function postRegister(req,res){
+	var username = req.body.Login;
+	var password = req.body.Password;
+	var password2 = req.body.Password-repeat;
+	var user = await db.find_user_by_name(username);
+	if(!user){
+		if (password===password2){
+			await db.add_user(usernme,password);
+			res.render('/login',{alert: {type: 'success', message: 'Rejsttacja się powiodła'}});
+		}
+		else {res.render('/register', { alert: { type: 'warning', message: 'Hasła są różne' } });}
+	}else{
+		res.render('/register', { alert: { type: 'warning', message: 'Nieprawidłowy login' } });
+	}
+
+}
 module.exports = {
 	getLogin,
 	postLogin,
-	logout
+	logout,
+	postRegister
 }
