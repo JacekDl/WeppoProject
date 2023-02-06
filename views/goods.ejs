@@ -20,13 +20,13 @@
                             <span class="good__description">
                                 <%= products[i].description>
                             </span>
-                            <a href="/changeGood.ejs">Zmien</a>
-                            <form method="DELETE" action="/admin/products">
+                            <a href=<%="/changeGood/" + products[i].name>Zmień</a>
+                            <form method="DELETE" action=<%="/admin/products/" + products[i].name %>>
                                 <button type="submit">Usuń</button>
                             </form>
                         </div>
                         <% } %>
-                            <a href="/addGood.ejs">Dodaj produkt</a>
+                            <a href="/addGood">Dodaj produkt</a>
                 </main>
                 <%- include ('components/footer.ejs') %>
     </body>

@@ -8,25 +8,17 @@
 
             <% include ('components/header.ejs)%>
 
-                <main class="goods__panel">
-                    <% for (let i=0; i<products.length; i++) { %>
-                        <div class="panel__item good">
-                            <span class="good__name">
-                                <%= products[i].name>
-                            </span>
-                            <span class="good__price">
-                                <%= products[i].price>
-                            </span>
-                            <span class="good__description">
-                                <%= products[i].description>
-                            </span>
-                            <a href="/changeGood.ejs">Zmien</a>
-                            <form method="DELETE" action="/admin/products">
-                                <button type="submit">Usuń</button>
-                            </form>
-                        </div>
-                        <% } %>
-                            <a href="/addGood.ejs">Dodaj produkt</span>
+                <main class="add-panel">
+                    <form method="PUT">
+                        <label class="add__item name_label" for="Name">Nazwa:</label>
+                        <input id='Name' class="name" type="text" name="Name" value=<%- product.name %>>/>
+                        <label class="add__item price__label" for="Price">Cena:</label>
+                        <input id="Price" class="price" type="number" name="Price" value=<%- product.price %>/>
+                        <label class="add__item description__label" for="Description">Opis:</label>
+                        <textarea id="Description" class="description" name="Description" value=<%- product.description
+                            %>></textarea>
+                        <button class="add__item submit" type="submit">Dodaj</button>
+                    </form>
                 </main>
                 <%- include ('components/footer.ejs') %>
     </body>
