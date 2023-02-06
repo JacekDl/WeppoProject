@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include ('components/head.ejs')%>
+
+    <body>
+        <%- include('components/adminPanel.ejs') %>
+
+            <% include ('components/header.ejs)%>
+
+                <main class="add-panel">
+                    <form method="POST">
+                        <label class="add__item name_label" for="Name">Nazwa:</label>
+                        <input id='Name' class="name" type="text" name="Name" />
+                        <label class="add__item price__label" for="Price">Cena:</label>
+                        <input id="Price" class="price" type="number" name="Price" />
+                        <label class="add__item description__label" for="Description">Opis:</label>
+                        <textarea id="Description" class="description" name="Description"></textarea>
+                        <button class="add__item submit" type="submit">Dodaj</button>
+                    </form>
+                </main>
+                <%- include ('components/footer.ejs') %>
+    </body>
+
+</html>

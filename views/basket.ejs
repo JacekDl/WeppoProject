@@ -9,8 +9,8 @@
                 <%} else { %>
                     <%- include ('components/userPanel.ejs') %>
 
-                        <% include ('components/header.ejs)%>
-                            <% include ('components/searchBar.ejs') %>
+                        <%- include ('components/header.ejs)%>
+                            <%- include ('components/searchBar.ejs') %>
 
                                 <main class="goods__panel">
                                     <% for (let i=0; i<products.length; i++) { %>
@@ -25,21 +25,21 @@
                                                 <%= products[i].description>
                                             </span>
                                             <div class="basket__wrapper">
-                                                <label class="basket__item basket__label" for="basket">Usuń zkoszyka
+                                                <label class="basket__item basket__label" for="basket">Usuń z
                                                     koszyka</label>
-                                                <img class="basket__item basket" src="../images/basketReject.jpeg"
-                                                    id="basket">
+                                                <button><a href=<%="/basket/" + product[i].name%>><img
+                                                            class="basket__item basket"
+                                                            src="../images/basketReject.jpeg" id="basket"></a></button>
                                             </div>
                                         </div>
                                         <% } %>
 
                                             <div>
                                                 <span>Suma:</span>
-                                                <span>Usuń zaznaczone z koszyka</span>
-                                                <span>Sfinalizuj zakup</span>
+                                                <span>Złóż zamówienie</span>
                                             </div>
                                 </main>
-                                <% include ('components/footer.ejs') %>
+                                <%- include ('components/footer.ejs') %>
     </body>
 
 </html>
