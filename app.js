@@ -1,16 +1,16 @@
-var http = require('http');
-var express = require('express');
-var session = require('express-session');
-var ejs = require('ejs');
-var ash = require('express-async-handler');
+const http = require('http');
+const express = require('express');
+const session = require('express-session');
+const ejs = require('ejs');
+const ash = require('express-async-handler');
 const path = require('path');
 const { application } = require('express');
-var cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 
 //passport
-var {checksession} = require('./functions/middleware');
-var userLogin =require('./functions/userLogin');
-
+const {checksession} = require('./functions/middleware');
+const userLogin =require('./functions/userLogin');
+const veryfication = require('./functions/verify')
 //var crypto = require('crypto');
 //var sectret = 'Lotr was not The 1!'
 
@@ -19,7 +19,7 @@ var userLogin =require('./functions/userLogin');
 
 
 
-var app = express();
+const app = express();
 
 app.set('views', './views');
 app.set('view engine', 'ejs');
@@ -64,7 +64,7 @@ app.get( '/admin', authorize('admin'), (req, res) => {
 	res.write('witaj administratorze');
 	res.end();
 })
-
+app.get('/admin/users',)
 /*
 app.get( '/login', (req, res) => {
 	res.render('login');
