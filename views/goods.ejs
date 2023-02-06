@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include ('components/head.ejs')%>
+
+    <body>
+        <%- include('components/adminPanel.ejs') %>
+
+            <% include ('components/header.ejs)%>
+
+                <main class="goods__panel">
+                    <% for (let i=0; i<products.length; i++) { %>
+                        <div class="panel__item good">
+                            <span class="good__name">
+                                <%= products[i].name>
+                            </span>
+                            <span class="good__price">
+                                <%= products[i].price>
+                            </span>
+                            <span class="good__description">
+                                <%= products[i].description>
+                            </span>
+                            <a href="/changeGood.ejs">Zmien</a>
+                            <form method="DELETE" action="/admin/products">
+                                <button type="submit">Usuń</button>
+                            </form>
+                        </div>
+                        <% } %>
+                            <a href="/addGood.ejs">Dodaj produkt</a>
+                </main>
+                <%- include ('components/footer.ejs') %>
+    </body>
+
+</html>
