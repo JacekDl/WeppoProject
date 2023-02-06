@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
-
-mongoose.connect("mongodb+srv://weppo:VfJ8CpO55Oj8QFwp@cluster0.xrcaeau.mongodb.net/?retryWrites=true&w=majority");
 const Product = require('../models/product');
 const User = require('../models/user');
-const bcrypt = require('bcrypt-nodejs');
+const Basket = require('../models/basket');
+const bcrypt = require('bcrypt');
+
+mongoose.connect("mongodb+srv://weppo:VfJ8CpO55Oj8QFwp@cluster0.xrcaeau.mongodb.net/?retryWrites=true&w=majority");
+
 
 // async function login_user(username,password){
 // 	if(username == password){
@@ -19,17 +21,32 @@ const bcrypt = require('bcrypt-nodejs');
 
 
 // TODO: to trzeba będzie zaimplementować z poziomu backendu - do compare trzeba dodać callback
-// async function login_user(username, guess) {
-// 	const user = await User.findOne({username: `${username}`});
-// 	console.log(user.username);
-// 	console.log(user.password);
-	
-// 	const match = await bcrypt.compare(guess, user.passwordHash, function(err, isMatch) {
-// 		if (err) throw err;
-// 		console.log(isMatch);
-// 	});
-	
-// }
+async function login_user(username, guess) {
+	const user = await User.findOne({username: `${username}`});
+	console.log(user.username);
+	console.log(user.password);
+
+	// generuje inne hash'e
+	// const salt = bcrypt.genSaltSync(10);
+	// const hash = bcrypt.hashSync(guess, salt);
+	// console.log(hash);
+
+	// const answer = await user.checkPassword(guess, function(err, isMatch) {
+    //     if (err) throw err;
+    //     console.log(isMatch);
+    // });	
+
+	// const ans = await bcrypt
+	// 	.compare(guess, user.password)
+	// 	.then( res => { 
+	// 		console.log(res) 
+	// 	})
+	// 	.catch(err => console.log(err.message));
+
+	// console.log(ans);
+	// return ans;
+
+}
 
 //może być po prostu jason ze wszystkim
 // przykład użycia await add_user("Zdzisław", "zpl")
@@ -62,17 +79,33 @@ async function add_product(name, description, price){
 	const product = await Product.create({name: `${name}`, description: `${description}`, price: `${price}`});
 }
 
+async function find_user_by_name(name) {
+	const user = await User.findOne({username: `${name}`});
+	return user;
+}
+
 // TODO: kasować produkt po nazwie (nieunikalna) czy po _id (unikalne)
-async function delete_product(name){}
+async function delete_product(id){
+	await Product.deleteOne({_id: `${id}`});
+}
 
-// TODO: updatować produkt raczej po _id niż name (nieunikalna)
-async function update_product(name, description, price){}
+// przykład użycia:
+// const prod3 = await Product.findOne({name: "apple"});
+// await services.update_product(prod3._id, "best in Wroclaw", 6.5);
+async function update_product(id, description, price){
+	await Product.updateOne({_id: `${id}`}, {description: description, price: price});
+}
 
-// TODO: ?
-async function give_all_orders(){}
+// TODO: na razie tylko działa dla _id - może lepiej byłoby dla name?
+async function give_all_orders(){
+	const orders = await Basket.find();
+	return orders;
+}
 
 // TODO: potrzeba _id usera i tablicy z _id produktów
-async function add_order(name,date,order,closed){} //order:jason{list[product]},closed:Boolean
+async function add_order(userId, productId, closed) {
+	await Basket.create({user: userId, products: productId});
+}
 
 // TODO: czy admin może mieć możliwość zmiany zamówienia?
 async function update_order(id_order,closed){}
@@ -85,7 +118,11 @@ module.exports = {
 	give_all_users,
 	add_product,
 	add_user,
-	find_user_by_name
+	find_user_by_name,
+	give_all_orders,
+	delete_product,
+	update_product,
+	add_order
 }
 
 

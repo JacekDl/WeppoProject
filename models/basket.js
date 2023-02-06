@@ -5,9 +5,10 @@ var basketSchema = mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         ref: "User"
     },
-    products: [{
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "Product"
-    }],
-    completed: Boolean
+    products: [
+        {type: mongoose.SchemaTypes.ObjectId, ref: "Product"}
+    ],
+    closed: { type: Boolean, default: true }
 });
+
+module.exports = mongoose.model('Basket', basketSchema);
