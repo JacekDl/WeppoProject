@@ -57,6 +57,7 @@ app.post('/login',ash(userLogin.postLogin));
 app.get('/orders',validate.vadmin,ash(admin_fun.orders));
 //basket
 app.get('/basket',validate.vuser,sbasket.get);
+app.post('/basket/:id(//d+)',sbasket.add);
 /*
 app.get( '/login', (req, res) => {
 	res.render('login');

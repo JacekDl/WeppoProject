@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include ('components/head.ejs', {title: "Warzywniak: Koszyk" , style: basket.css })%>
+<%- include ('components/head.ejs', {title: "Warzywniak: Koszyk"    , style: basket.css }) %>
 
     <body>
-        <% if ((locals.role==='admin' ) { %>
+        <% if (locals.role==='admin' ) { %>
             <%- include ('components/adminPanel.ejs') %>
                 <%} else { %>
                     <%- include ('components/userPanel.ejs') %>
@@ -28,11 +28,7 @@
                                                 <div class="basket__wrapper">
                                                     <label class="basket__item basket__label" for="basket">Usuń z
                                                         koszyka</label>
-                                                    <button><a href=<%="/basket/" + product[i].name%>><img
-                                                                class="basket__item basket"
-                                                                src="../images/basketReject.jpeg"
-                                                                id="basket"></a></button>
-                                                </div>
+                                                    
                                             </div>
                                             <% } %>
 
