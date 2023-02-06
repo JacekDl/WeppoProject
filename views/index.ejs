@@ -19,6 +19,7 @@
                 <% include ('components/searchBar.ejs') %>
 
                     <main class="goods__panel">
+                        <% if(locals.products){ %> 
                         <% for (let i=0; i<products.length; i++) { %>
                             <div class="panel__item good">
                                 <span class="good__name">
@@ -37,9 +38,11 @@
                                 </div>
                             </div>
                             <% } %>
+                        <% } %>
                     </main>
 
                     <% include ('components/footer.ejs') %>
+                    
     </body>
 
 </html>

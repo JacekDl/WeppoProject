@@ -56,17 +56,20 @@ function authorize(...roles){
 		res.redirect('/login?returnUrl='+req.url);
 	}
 }
-//app.get('/',(req,res)=>{res.render('index',{products:});});
-app.get('/',user_fun.give_all_product)
-app.get('/logout',userLogin.logout);
-app.get ('/login',userLogin.getLogin);
-app.post('/login',ash(userLogin.postLogin));
+app.get('/',(req,res)=>{res.render('index');});
+app.get('/products',user_fun.give_all_product);
+
 app.get( '/admin', authorize('admin'), (req, res) => {
 	res.setHeader('Content-type', 'text/html; charset=utf-8');
 	res.write('witaj administratorze');
 	res.end();
-})
-app.get('/admin/users',)
+});
+//app.get('/admin/users',)
+//logowanie i rejestr
+app.get('/register',(req,res)=> (res.render('register')));
+app.get('/logout',userLogin.logout);
+app.get ('/login',userLogin.getLogin);
+app.post('/login',ash(userLogin.postLogin));
 /*
 app.get( '/login', (req, res) => {
 	res.render('login');
