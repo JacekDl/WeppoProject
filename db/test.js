@@ -111,5 +111,10 @@ async function main() {
     // const user = await services.find_user_by_name("Krzych");
     // console.log(user);
 
-    await services.add_user("Krzych", "abc");
+    // await services.add_user("Krzych", "abc");
+
+    // console.log(await services.find_user_by_name("Krzychu"));
+
+    const products = await services.find_by_description("and");
+    console.log(products);
 }

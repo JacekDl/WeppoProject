@@ -48,25 +48,35 @@ async function login_user(username, guess) {
 
 }
 
-// przykład użycia await add_user("Zdzisław", "zpl")
+// zapisuje obiekt do bazy danych
+// jeśli username się powtarza wypisuje błąd na konsoli
+// przykład użycia await add_user("User1", "password1")
 async function add_user(name, password){
 	await User.create({username: `${name}`, password: `${password}`}, err => console.log(err.message));
 }
 
+// zwraca obiekt użytkownika lub null jeśli użytkownik nie został znaleziony
 async function find_user_by_name(name){
 	const user = User.findOne({username: name});
 	return user;
 }
 
+// zwraca listę obiektów produktów
 // przykład użycia: const pr = await services.give_all_product();
 async function give_all_product(){
 	const products = await Product.find();
 	return products;
 }
 
+// zwraca listę obiektów produktów rozpoczynających się od name
 // przykład użycia: const pr_name = await services.find_by_name("app");
 async function find_by_name(name){
 	const products = await Product.findByName(name);
+	return products;
+}
+
+async function find_by_description(description) {
+	const products = await Product.findByDescription(description);
 	return products;
 }
 
@@ -126,7 +136,8 @@ module.exports = {
 	give_all_orders,
 	delete_product,
 	update_product,
-	add_order
+	add_order,
+	find_by_description
 }
 
 
