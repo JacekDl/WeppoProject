@@ -11,7 +11,7 @@ productSchema.methods.getName = function() {
 }
 
 productSchema.statics.findByName = function(name) {
-    return this.find({name: new RegExp(`^${name}`, 'i')});
+    return this.find({name: new RegExp(`${name}`, 'i')});
 }
 
 productSchema.statics.findByDescription = function(description) {

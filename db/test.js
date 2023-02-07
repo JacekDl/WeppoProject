@@ -89,9 +89,13 @@ async function main() {
     // const bask1 = new Basket({user: user1._id, products: [prod1._id, prod2._id]});
     // await bask1.save();
 
+<<<<<<< HEAD
     await services.add_order(user1.username, [prod1, prod2]);
     const order = await services.give_all_orders();
     console.log(order);
+=======
+    // await services.add_order(user1.username, [prod1, prod2]);
+>>>>>>> db
 
     // const ord1 = await services.give_all_orders();
     // console.log(ord1);
@@ -106,7 +110,7 @@ async function main() {
     ///// updatowanie produktu ///// OK
     // const prod3 = await Product.findOne({name: "apple"});
     // console.log(prod3);
-    // await services.update_product(prod3._id, "best in Wroclaw", 6.5);
+    // await services.update_product(prod3._id, "apples 1kg", "best in Wroclaw", 6.5);
 
     // const user = await services.find_user_by_name("Krzych");
     // console.log(user);

@@ -107,9 +107,9 @@ async function delete_product(id){
 
 // przykład użycia:
 // const prod3 = await Product.findOne({name: "apple"});
-// await services.update_product(prod3._id, "best in Wroclaw", 6.5);
-async function update_product(id, description, price){
-	await Product.updateOne({_id: `${id}`}, {description: description, price: price});
+// await services.update_product(prod3._id, "apples 1kg", "best in Wroclaw", 6.5);
+async function update_product(id, name, description, price){
+	await Product.updateOne({_id: `${id}`}, {name: name, description: description, price: price});
 }
 
 // TODO: na razie tylko działa dla _id - może lepiej byłoby dla name?
