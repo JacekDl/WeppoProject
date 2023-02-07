@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include ('components/head.ejs', {title: "Warzywniak: Koszyk"    , style: basket.css }) %>
+<%- include ('components/head.ejs', {title: "Warzywniak: Koszyk" , style: basket.css })%>
 
     <body>
         <% if (locals.role==='admin' ) { %>
@@ -25,10 +25,6 @@
                                                 <span class="good__description">
                                                     <%= products[i].description%>
                                                 </span>
-                                                <div class="basket__wrapper">
-                                                    <label class="basket__item basket__label" for="basket">Usuń z
-                                                        koszyka</label>
-                                                    
                                             </div>
                                             <% } %>
 
