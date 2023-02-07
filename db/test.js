@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const Product = require('./models/product');
-const User = require('./models/user');
-const Basket = require('./models/basket');
-const services = require('./db/db_services');
+const Product = require('../models/product');
+const User = require('../models/user');
+const Basket = require('../models/basket');
+const services = require('./db_services');
 
 mongoose.connect("mongodb+srv://weppo:VfJ8CpO55Oj8QFwp@cluster0.xrcaeau.mongodb.net/?retryWrites=true&w=majority");
 
@@ -82,16 +82,14 @@ async function main() {
 
     ///// dodanie basket ///// OK
     const user1 = await User.findOne({username: "Jacek"});
-    console.log(user1);
     const prod1 = await Product.findOne({name: "apple"});
-    console.log(prod1);
     const prod2 = await Product.findOne({name: "orange"});
-    console.log(prod2);
+
 
     // const bask1 = new Basket({user: user1._id, products: [prod1._id, prod2._id]});
     // await bask1.save();
 
-    await services.add_order(user1._id, [prod1._id, prod2._id]);
+    await services.add_order(user1.username, [prod1, prod2]);
 
     // const ord1 = await services.give_all_orders();
     // console.log(ord1);
@@ -107,4 +105,14 @@ async function main() {
     // const prod3 = await Product.findOne({name: "apple"});
     // console.log(prod3);
     // await services.update_product(prod3._id, "best in Wroclaw", 6.5);
+
+    // const user = await services.find_user_by_name("Krzych");
+    // console.log(user);
+
+    // await services.add_user("Krzych", "abc");
+
+    // console.log(await services.find_user_by_name("Krzychu"));
+
+    // const products = await services.find_by_description("and");
+    // console.log(products);
 }
