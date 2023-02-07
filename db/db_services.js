@@ -52,7 +52,7 @@ async function login_user(username, guess) {
 // jeśli username się powtarza wypisuje błąd na konsoli
 // przykład użycia await add_user("User1", "password1")
 async function add_user(name, password){
-	await User.create({username: name, password: password}, err => console.log(err.message));
+	await User.create({username: name, password: password});
 }
 
 // zwraca obiekt użytkownika lub null jeśli użytkownik nie został znaleziony
