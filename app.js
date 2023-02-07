@@ -68,6 +68,7 @@ app.post('/addGood',validate.vadmin,ash(admin_fun.goods_add));
 app.get('/changeGood/:id',validate.vadmin,ash(admin_fun.goods_change_get));
 app.post('/changeGood',validate.vadmin,ash(admin_fun.goods_change)); //how to use put
 app.post('/admin/products/:id',validate.vadmin,ash(admin_fun.goods_delete)); //how to use delete
+app.post('/index/find',ash(user_fun.find));
 /*
 app.get( '/login', (req, res) => {
 	res.render('login');
