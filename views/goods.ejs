@@ -21,7 +21,7 @@
                                 <%= products[i].description%>
                             </span>
                             <a href=<%="/changeGood/" + products[i].name%>>Zmień</a>
-                            <form method="DELETE" action=<%="/admin/products/" + products[i].name %>>
+                            <form method="POST" action=<%="/admin/products/" + products[i].name %>>
                                 <button type="submit">Usuń</button>
                             </form>
                         </div>

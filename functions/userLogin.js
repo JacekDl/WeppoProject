@@ -67,7 +67,7 @@ async function postRegister(req,res){
 	if(!user){
 		if (password==password2 && password != ''){
 			await db.add_user(username,password);
-			res.render('index',{alert: {type: 'success', message: 'Rejsttacja się powiodła'}});
+			res.redirect('/');
 		}
 		else {res.render('register', { alert: { type: 'warning', message: 'Hasła są różne' } });}
 	}else{
