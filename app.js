@@ -14,6 +14,7 @@ const validate = require('./functions/verify');
 const admin_fun= require('./functions/admin_fun');
 const user_fun = require('./functions/user_fun');
 const sbasket = require('./functions/basket_fun');
+const { rootCertificates } = require('tls');
 //var crypto = require('crypto');
 //var sectret = 'Lotr was not The 1!'
 
@@ -23,6 +24,7 @@ const sbasket = require('./functions/basket_fun');
 
 
 const app = express();
+app.use('/images',express.static('images'));
 
 app.set('views', './views');
 app.set('view engine', 'ejs');
@@ -69,6 +71,7 @@ app.get('/changeGood/:id',validate.vadmin,ash(admin_fun.goods_change_get));
 app.post('/changeGood',validate.vadmin,ash(admin_fun.goods_change)); //how to use put
 app.post('/admin/products/:id',validate.vadmin,ash(admin_fun.goods_delete)); //how to use delete
 app.post('/index/find',ash(user_fun.find));
+
 /*
 app.get( '/login', (req, res) => {
 	res.render('login');
