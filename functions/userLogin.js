@@ -34,7 +34,9 @@ async function postLogin(req, res) {
 			req.session.basket = [];
 			var redirect = '/';
 			if (req.query.redirect) {
+				
 				redirect = req.query.redirect;
+				
 			}
 			res.redirect(redirect);
 		} else {
