@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include ('components/head.ejs', {title: "Warzywniak: Administrator - zmiana towaru" , style: adminAddGood.css })%>
+<%- include ('components/head.ejs', {title: "Warzywniak: Administrator - zmiana towaru" , style: 'adminAddGood.css' })%>
 
     <body>
         <%- include('components/adminPanel.ejs') %>
 
-            <% include ('components/header.ejs)%>
+            <% include ('components/header.ejs')%>
 
                 <main class="add-panel">
-                    <form method="PUT">
-                        <input id="ID",class="name" type="object" name="ID" hidden="true" value=<%- product.id %>/>
+                    <form method="POST" action="/changeGood">
+                        <input id="ID",class="name" type="object" name="ID" hidden="true" value=<%- product.id %>>
                         <label class="add__item name_label" for="Name">Nazwa:</label>
-                        <input id='Name' class="name" type="text" name="Name" value=<%- product.name %>>/>
+                        <input id='Name' class="name" type="text" name="Name" value=<%- product.name %>>
                         <label class="add__item price__label" for="Price">Cena:</label>
-                        <input id="Price" class="price" type="number" name="Price" value=<%- product.price %>/>
+                        <input id="Price" class="price" type="number" name="Price" value=<%- product.price %>>
                         <label class="add__item description__label" for="Description">Opis:</label>
-                        <textarea id="Description" class="description" name="Description" value=<%- product.description
-                            %>></textarea>
-                        <button class="add__item submit" type="submit">Dodaj</button>
+                        <input id="Description" class="description" type="text" name="Description" value=<%- product.description %>></textarea>
+                        <button class="add__item submit" type="submit">Zmien</button>
                     </form>
                 </main>
                 <%- include ('components/footer.ejs') %>
