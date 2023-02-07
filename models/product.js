@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var productSchema = mongoose.Schema({
-    name: { type: String, required: true, unique: false },
+    name: { type: String, required: true, uppercase: true, unique: false },
     description: { type: String },
     price: { type: Number, required: true, min:  0.01}
 });
