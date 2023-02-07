@@ -52,30 +52,29 @@ async function goods_change(req,res){
 	let name=req.body.Name;
 	let des=req.body.Description;
 	let p = req.body.Price;
-	await db.update_product(id,des,p);
-	req.session.customAlert = { type: 'success', message: 'Zmieniono produkt '+name };
-	res.redirect('/goods');
-	/*
+	//await db.update_product(id,des,p);
+	//req.session.customAlert = { type: 'success', message: 'Zmieniono produkt '+name };
+	//res.redirect('/goods');
+	
    	let product = await db.find_by_name(name);
     	if(product){
 		if(name==product[0].name){
-			await db.update_product(id,des,p,name);
+			await db.update_product(id,name,des,p);
 			res.redirect('/goods');
 		}
 		else{
-			req.session.customAlert = { type: 'denger', message: 'Nazwa jużistnieje' };
+			req.session.customAlert = { type: 'denger', message: 'Nazwa już istnieje' };
 			res.redirect('/goods');
-			//res.redirect('/haha_bardzo_smieszne_Czy_to_się_nie_nudzi???_brak_slow');}
+			//res.redirect('/haha_bardzo_smieszne_Czy_to_się_nie_nudzi???_brak_slow');
+		}
 	}
    	else{
-	await db.update_product(id,des,p,name);
+	await db.update_product(id,name,des,p);
 	req.session.customAlert = { type: 'success', message: 'Zmieniono produkt '+name };
 	res.redirect('/goods');}
+	}
 
-	*/
-
-
-}
+	
 async function goods_change_get(req,res){
 	let name = String(req.params.id);
    	let product = await db.find_by_name(name);
