@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-username, price, status
-user, lista,
-<% include ('components/head.ejs', {title: "Warzywniak: Administrator - zamówienia" , style: "adminOrders.css" })%>
+
+<%- include ('components/head.ejs', {title: "Warzywniak: Administrator - zamówienia" , style: "adminOrders.css" })%>
 
     <body>
         <%- include('components/adminPanel.ejs') %>
@@ -13,17 +12,19 @@ user, lista,
                     <% for (let i=0; i<orders.length; i++) { %>
                         <div class="panel__item order">
                             <span class="order__username">
-                                <%= orders[i].user>
+                                <%= orders[i].user%>
                             </span>
                             <div class="panel__item orders">
                                 <% for (let i=0; i<products.length; i++) { %>
                                     <div class="good">
                                         <span class="good__name">
-                                            <%= products[i].name>
+                                            <%= products[i].name%>
                                         </span>
                                     </div>
                             </div>
-                            <span class="panel__item total">Suma:</span>
+                            <span class="panel__item total">
+                                <%= Suma: + total%>
+                            </span>
                         </div>
                         <% } %>
                 </main>
