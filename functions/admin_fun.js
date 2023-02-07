@@ -55,9 +55,11 @@ async function goods_change(req,res){
 	//await db.update_product(id,des,p);
 	//req.session.customAlert = { type: 'success', message: 'Zmieniono produkt '+name };
 	//res.redirect('/goods');
+	var product=[];
+   	product = product.concat(await db.find_by_name(name));
 	
-   	let product = await db.find_by_name(name);
-    	if(product){
+    	if(product.length!=0){
+		
 		if(name==product[0].name){
 			await db.update_product(id,name,des,p);
 			res.redirect('/goods');
@@ -69,6 +71,7 @@ async function goods_change(req,res){
 		}
 	}
    	else{
+		
 	await db.update_product(id,name,des,p);
 	req.session.customAlert = { type: 'success', message: 'Zmieniono produkt '+name };
 	res.redirect('/goods');}
