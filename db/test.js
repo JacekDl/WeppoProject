@@ -90,6 +90,8 @@ async function main() {
     // await bask1.save();
 
     await services.add_order(user1.username, [prod1, prod2]);
+    const order = await services.give_all_orders();
+    console.log(order);
 
     // const ord1 = await services.give_all_orders();
     // console.log(ord1);

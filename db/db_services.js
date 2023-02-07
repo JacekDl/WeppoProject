@@ -52,7 +52,7 @@ async function login_user(username, guess) {
 // jeśli username się powtarza wypisuje błąd na konsoli
 // przykład użycia await add_user("User1", "password1")
 async function add_user(name, password){
-	await User.create({username: name, password: password}, err => console.log(err.message));
+	await User.create({username: name, password: password});
 }
 
 // zwraca obiekt użytkownika lub null jeśli użytkownik nie został znaleziony
@@ -126,8 +126,6 @@ async function add_order(userName, products, completed) {
 		sum += product.price;
 		productName.push(product.name);
 	}
-	console.log(sum, productName);
-
 	await Basket.create({user: userName, products: productName, price: sum});
 }
 
