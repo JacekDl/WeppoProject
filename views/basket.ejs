@@ -5,13 +5,13 @@
 
     <body>
         <% if (locals.role==='admin' ) { %>
-            <%- include ('components/adminPanel.ejs') %>
+            <%- include ('components/adminPanel.ejs', {style: "panel.css" }) %>
                 <%} else { %>
-                    <%- include ('components/userPanel.ejs') %>
+                    <%- include ('components/userPanel.ejs', {style: "panel.css" }) %>
                         <%} %>
 
-                            <%- include ('components/header.ejs')%>
-                                <%- include ('components/searchBar.ejs') %>
+                            <%- include ('components/header.ejs', {style: "header.css" })%>
+                                <%- include ('components/searchBar.ejs', {style: "searchBar.css" }) %>
 
                                     <main class="goods__panel">
                                         <% for (let i=0; i<products.length; i++) { %>
@@ -32,10 +32,10 @@
                                                     <span>
                                                         <%="Suma:" + total %>
                                                     </span>
-                                                    <span>Złóż zamówienie</span>
+                                                    <a href="/checkout">Złóż zamówienie</a>
                                                 </div>
                                     </main>
-                                    <%- include ('components/footer.ejs') %>
+                                    <%- include ('components/footer.ejs', {style: "footer.css" }) %>
     </body>
 
 </html>

@@ -4,7 +4,7 @@
 <%- include ('components/head.ejs', {title: "Warzywniak - Logowanie" , style: "login.css" }) %>
 
     <body>
-        <%- include ('components/header.ejs')%>
+        <%- include ('components/header.ejs', {style: "header.css" })%>
             <form class="Login__wrapper" method="post">
                 <label class="Login__item Login__label" for="Login">Nazwa użytkownika:</label>
                 <input class="Login__item Login" id="Login" name="Login" type="text">
@@ -13,7 +13,7 @@
                 <button class="Login__item submit" type="submit">Zaloguj się</button>
             </form>
 
-            <%- include ('components/footer.ejs') %>
+            <%- include ('components/footer.ejs', {style: "footer.css" }) %>
     </body>
 
 </html>

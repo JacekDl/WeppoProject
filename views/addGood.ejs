@@ -5,9 +5,9 @@
     })%>
 
     <body>
-        <%- include('components/adminPanel.ejs') %>
+        <%- include('components/adminPanel.ejs', {style: "panel.css" }) %>
 
-            <% include ('components/header.ejs')%>
+            <% include ('components/header.ejs', {style: "header.css" })%>
 
                 <main class="add-panel">
                     <form method="POST">
@@ -20,7 +20,7 @@
                         <button class="add__item submit" type="submit">Dodaj</button>
                     </form>
                 </main>
-                <%- include ('components/footer.ejs') %>
+                <%- include ('components/footer.ejs', {style: "footer.css" }) %>
     </body>
 
 </html>

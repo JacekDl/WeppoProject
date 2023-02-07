@@ -4,9 +4,9 @@
 <%- include ('components/head.ejs', {title: "Warzywniak: Administrator - użytkownicy" , style: "adminUsers.css" }) %>
 
     <body>
-        <%- include ('components/adminPanel.ejs') %>
+        <%- include ('components/adminPanel.ejs', {style: "panel.css" }) %>
 
-            <%- include ('components/header.ejs')%>
+            <%- include ('components/header.ejs', {style: "header.css" })%>
 
                 <main class="users__panel">
                     <% for (let i=0; i<users.length; i++) { %>
@@ -21,7 +21,7 @@
                         <% } %>
                 </main>
 
-                <%- include ('components/footer.ejs') %>
+                <%- include ('components/footer.ejs', {style: "footer.css" }) %>
     </body>
 
 </html>

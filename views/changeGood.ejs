@@ -4,9 +4,9 @@
 <%- include ('components/head.ejs', {title: "Warzywniak: Administrator - zmiana towaru" , style: 'adminAddGood.css' })%>
 
     <body>
-        <%- include('components/adminPanel.ejs') %>
+        <%- include('components/adminPanel.ejs', {style: "panel.css" }) %>
 
-            <% include ('components/header.ejs')%>
+            <% include ('components/header.ejs', {style: "header.css" })%>
 
                 <main class="add-panel">
                     <form method="POST" action="/changeGood">
@@ -19,10 +19,10 @@
                         <label class="add__item description__label" for="Description">Opis:</label>
                         <input id="Description" class="description" type="text" name="Description"
                             value="<%- product.description %>">
-                        <button class="add__item submit" type="submit">Zmien</button>
+                        <button class="add__item submit" type="submit">Zmień</button>
                     </form>
                 </main>
-                <%- include ('components/footer.ejs') %>
+                <%- include ('components/footer.ejs', {style: "footer.css" }) %>
     </body>
 
 </html>

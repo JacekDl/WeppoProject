@@ -4,9 +4,9 @@
 <%- include ('components/head.ejs', {title: "Warzywniak: Administrator - zamówienia" , style: "adminOrders.css" })%>
 
     <body>
-        <%- include('components/adminPanel.ejs') %>
+        <%- include('components/adminPanel.ejs', {style: "panel.css" }) %>
 
-            <%- include('components/header.ejs') %>
+            <%- include('components/header.ejs', {style: "header.css" }) %>
 
                 <main class="orders__panel">
                     <% for (let i=0; i<orders.length; i++) { %>
@@ -29,7 +29,7 @@
                         </div>
                         <% } %>
                 </main>
-                <%- include ('components/footer.ejs') %>
+                <%- include ('components/footer.ejs', {style: "footer.css" }) %>
     </body>
 
 </html>
