@@ -57,7 +57,12 @@ app.post('/login',ash(userLogin.postLogin));
 app.get('/orders',validate.vadmin,ash(admin_fun.orders));
 //basket
 app.get('/basket',validate.vuser,sbasket.get);
-app.post('/basket/:id(//d+)',sbasket.add);
+app.get('/basket/:id',validate.vuser,ash(sbasket.add));
+app.get('/checkout',validate.vuser,ash(sbasket.order_post));
+app.get('/users',validate.vadmin,ash(admin_fun.users));
+
+
+app.get('/goods',validate.vadmin,ash(admin_fun.goods_get));
 /*
 app.get( '/login', (req, res) => {
 	res.render('login');
@@ -90,6 +95,7 @@ app.get('*',(req,res)=> {
 
 http.createServer(app).listen(process.env.PORT || 3000);
 console.log( 'serwer działa' );
+
 /*
 index - cokie - jak przekazać , liste produktów jakoś
 basket - cokie - pamiętanmie listy wybranych produktów ( obiekt js ) 
