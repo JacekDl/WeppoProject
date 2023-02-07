@@ -75,6 +75,8 @@ async function find_by_name(name){
 	return products;
 }
 
+// zwraca listę obiektów, w których opisie występuje fragment descripiton
+// przykład użycia: const products = await services.find_by_description("and");
 async function find_by_description(description) {
 	const products = await Product.findByDescription(description);
 	return products;
@@ -116,11 +118,6 @@ async function give_all_orders(){
 	return orders;
 }
 
-// // TODO: potrzeba _id usera i tablicy z _id produktów
-// async function add_order(userId, productId, closed) {
-// 	await Basket.create({user: userId, products: productId});
-// }
-
 // TODO: potrzeba _id usera i tablicy z _id produktów
 async function add_order(userName, products, completed) {
 	var sum = 0;
@@ -139,7 +136,6 @@ async function update_order(id_order,closed){}
 
 
 module.exports = {
-	//login_user,
 	give_all_product,
 	find_by_name,
 	give_all_users,
