@@ -52,7 +52,7 @@ async function login_user(username, guess) {
 // jeśli username się powtarza wypisuje błąd na konsoli
 // przykład użycia await add_user("User1", "password1")
 async function add_user(name, password){
-	await User.create({username: `${name}`, password: `${password}`}, err => console.log(err.message));
+	await User.create({username: name, password: password}, err => console.log(err.message));
 }
 
 // zwraca obiekt użytkownika lub null jeśli użytkownik nie został znaleziony
@@ -116,9 +116,22 @@ async function give_all_orders(){
 	return orders;
 }
 
+// // TODO: potrzeba _id usera i tablicy z _id produktów
+// async function add_order(userId, productId, closed) {
+// 	await Basket.create({user: userId, products: productId});
+// }
+
 // TODO: potrzeba _id usera i tablicy z _id produktów
-async function add_order(userId, productId, closed) {
-	await Basket.create({user: userId, products: productId});
+async function add_order(userName, products, completed) {
+	var sum = 0;
+	var productName = [];
+	for (let product of products) {
+		sum += product.price;
+		productName.push(product.name);
+	}
+	console.log(sum, productName);
+
+	await Basket.create({user: userName, products: productName, price: sum});
 }
 
 // TODO: czy admin może mieć możliwość zmiany zamówienia?

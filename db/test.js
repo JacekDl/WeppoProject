@@ -81,17 +81,15 @@ async function main() {
 
 
     ///// dodanie basket ///// OK
-    // const user1 = await User.findOne({username: "Jacek"});
-    // console.log(user1);
-    // const prod1 = await Product.findOne({name: "apple"});
-    // console.log(prod1);
-    // const prod2 = await Product.findOne({name: "orange"});
-    // console.log(prod2);
+    const user1 = await User.findOne({username: "Jacek"});
+    const prod1 = await Product.findOne({name: "apple"});
+    const prod2 = await Product.findOne({name: "orange"});
+
 
     // const bask1 = new Basket({user: user1._id, products: [prod1._id, prod2._id]});
     // await bask1.save();
 
-    // await services.add_order(user1._id, [prod1._id, prod2._id]);
+    await services.add_order(user1.username, [prod1, prod2]);
 
     // const ord1 = await services.give_all_orders();
     // console.log(ord1);
@@ -115,6 +113,6 @@ async function main() {
 
     // console.log(await services.find_user_by_name("Krzychu"));
 
-    const products = await services.find_by_description("and");
-    console.log(products);
+    // const products = await services.find_by_description("and");
+    // console.log(products);
 }
