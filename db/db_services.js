@@ -126,8 +126,6 @@ async function add_order(userName, products, completed) {
 		sum += product.price;
 		productName.push(product.name);
 	}
-	console.log(sum, productName);
-
 	await Basket.create({user: userName, products: productName, price: sum});
 }
 
