@@ -15,14 +15,17 @@
                                 <%= orders[i].user%>
                             </span>
                             <div class="panel__item orders">
-                                <% for (let i=0; i<products.length; i++) { %>
+                                <% for (let j=0; j<orders[i].products.length; j++) { %>
                                     <div class="good">
                                         <span class="good__name">
-                                            <%= products[i].name%>
+                                            <%= orders[i].products[j]%>
                                         </span>
                                     </div>
+                                    <% } %>
                             </div>
-                            <span class="panel__item total">Suma:</span>
+                            <span class="panel__item total">
+                                <%= "Suma: " + orders[i].price%>
+                            </span>
                         </div>
                         <% } %>
                 </main>
