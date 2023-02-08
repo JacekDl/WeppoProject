@@ -89,13 +89,9 @@ async function main() {
     // const bask1 = new Basket({user: user1._id, products: [prod1._id, prod2._id]});
     // await bask1.save();
 
-<<<<<<< HEAD
     await services.add_order(user1.username, [prod1, prod2]);
     const order = await services.give_all_orders();
     console.log(order);
-=======
-    // await services.add_order(user1.username, [prod1, prod2]);
->>>>>>> db
 
     // const ord1 = await services.give_all_orders();
     // console.log(ord1);
